@@ -36,7 +36,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         //passing data to  views from selected titles
         //putting data together
 
@@ -47,8 +47,25 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         holder.date.setText(Util.dateFormatted(article.getPublishDate()));
         holder.author.setText(article.getAuthor());
 
+//        BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.articleImage.getDrawable();
+//
+//        Bitmap photo = bitmapDrawable.getBitmap();
+//        Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
+//            @Override
+//            public void onGenerated(Palette palette) {
+//
+//                int bgColor = palette.getMutedColor(ContextCompat.getColor(context,
+//                        android.R.color.black));
+//
+//                holder.date.setBackgroundColor(bgColor);
+//                holder.author.setTextColor(bgColor);
+//
+//            }
+//        });
         //get image
-        Glide.with(context).load(article.getImageUrl()).into(holder.articleImage);
+        Glide.with(context)
+                .load(article.getImageUrl()).
+                into(holder.articleImage);
 
 
     }
