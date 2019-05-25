@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.puseletsomaraba.newsfeed.R;
+import com.puseletsomaraba.newsfeed.util.Util;
 
 import java.util.ArrayList;
 
@@ -42,8 +44,11 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
         holder.title.setText(article.getTitle());
         holder.description.setText(article.getDescription());
-        holder.date.setText(article.getPublishDate());
+        holder.date.setText(Util.dateFormatted(article.getPublishDate()));
         holder.author.setText(article.getAuthor());
+
+        //get image
+        Glide.with(context).load(article.getImageUrl()).into(holder.articleImage);
 
 
     }
