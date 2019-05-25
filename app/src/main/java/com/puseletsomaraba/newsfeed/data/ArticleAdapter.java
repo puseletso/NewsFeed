@@ -1,6 +1,10 @@
 package com.puseletsomaraba.newsfeed.data;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.graphics.Palette;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.puseletsomaraba.newsfeed.R;
 import com.puseletsomaraba.newsfeed.util.Util;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,25 +51,28 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         holder.date.setText(Util.dateFormatted(article.getPublishDate()));
         holder.author.setText(article.getAuthor());
 
-//        BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.articleImage.getDrawable();
-//
-//        Bitmap photo = bitmapDrawable.getBitmap();
-//        Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
-//            @Override
-//            public void onGenerated(Palette palette) {
-//
-//                int bgColor = palette.getMutedColor(ContextCompat.getColor(context,
-//                        android.R.color.black));
-//
-//                holder.date.setBackgroundColor(bgColor);
-//                holder.author.setTextColor(bgColor);
-//
-//            }
-//        });
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) holder.articleImage.getDrawable();
+
+        Bitmap photo = bitmapDrawable.getBitmap();
+        Palette.from(photo).generate(new Palette.PaletteAsyncListener() {
+            @Override
+            public void onGenerated(Palette palette) {
+
+                int bgColor = palette.getMutedColor(ContextCompat.getColor(context,
+                        android.R.color.black));
+
+                holder.date.setBackgroundColor(bgColor);
+                holder.author.setTextColor(bgColor);
+
+            }
+        });
         //get image
-        Glide.with(context)
-                .load(article.getImageUrl()).
-                into(holder.articleImage);
+//        Glide.with(context)
+//                .load(article.getImageUrl()).
+//                into(holder.articleImage);
+        Picasso.get()
+                .load(article.getImageUrl())
+                .into(holder.articleImage);
 
 
     }

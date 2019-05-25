@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ArticleData {
 
     ArrayList<Article> articles = new ArrayList<>();
-    String url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=ceab81f667224435a9b02c4dc193d557";
+    String url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=ceab81f667224435a9b02c4dc193d557";
 
 
     public void getNewsList(final ArticleLsitAsynResponse callback) {
