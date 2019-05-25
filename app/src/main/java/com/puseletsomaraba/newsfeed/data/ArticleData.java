@@ -1,5 +1,7 @@
 package com.puseletsomaraba.newsfeed.data;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,7 +20,7 @@ public class ArticleData {
     String url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=ceab81f667224435a9b02c4dc193d557";
 
 
-    public void getNewsList() {
+    public void getNewsList(final ArticleLsitAsynResponse callback) {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -38,7 +40,19 @@ public class ArticleData {
                         article.setNewsUrl(articleObject.getString("url"));
 
 
+                        //add article to arraylist
+                        articles.add(article);
+
+
+
+
                     }
+
+                    if (null != callback) callback.processFinish(articles);
+
+
+                    //check array ,is  getting info from api
+                    Log.v("maraba article object: ", articles.toString());
 
 
                 } catch (JSONException e) {

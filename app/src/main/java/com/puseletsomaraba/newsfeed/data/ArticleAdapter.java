@@ -50,7 +50,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return articles.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
