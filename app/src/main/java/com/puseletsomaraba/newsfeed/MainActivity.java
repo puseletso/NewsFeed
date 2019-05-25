@@ -1,11 +1,11 @@
 package com.puseletsomaraba.newsfeed;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.puseletsomaraba.newsfeed.data.Article;
 import com.puseletsomaraba.newsfeed.data.ArticleAdapter;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         new ArticleData().getNewsList(new ArticleLsitAsynResponse() {
             @Override
-            public void processFinish(ArrayList<Article> articles) {
+            public void processFinish(final ArrayList<Article> articles) {
 
                 //instantiate view
                 recyclerView = findViewById(R.id.recyclerView);
@@ -41,7 +41,16 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(View view, int position) {
 
-                        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                        Article article = articles.get(position);
+
+                        Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+                        intent.putExtra("url", article.getNewsUrl());
+                        startActivity(intent);
+
+
+
+
+
 
                     }
                 });
