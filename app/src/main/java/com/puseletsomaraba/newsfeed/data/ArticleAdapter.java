@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.puseletsomaraba.newsfeed.R;
 import com.puseletsomaraba.newsfeed.util.Util;
@@ -82,7 +83,8 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         return articles.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    //ViewHolder initialises the views and set the click listner ,when article is clicked,it takes to to full article
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //instantiate views
         public ImageView articleImage;
         public TextView author, description, title, date;
@@ -90,11 +92,20 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(this);//registers my views to receive clicks
+
             articleImage = itemView.findViewById(R.id.newsimageid);
             author = itemView.findViewById(R.id.author);
             description = itemView.findViewById(R.id.descriptionNews);
             title = itemView.findViewById(R.id.newsTitle);
             date = itemView.findViewById(R.id.date);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context, "Redirect me to full article", Toast.LENGTH_LONG).show();
+
 
         }
     }
