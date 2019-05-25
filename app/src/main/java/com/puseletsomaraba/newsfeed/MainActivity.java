@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.puseletsomaraba.newsfeed.data.Article;
 import com.puseletsomaraba.newsfeed.data.ArticleAdapter;
@@ -34,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
                 //set recycler layoutmanager to set up the views
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(articleAdapter);
+
+                articleAdapter.setOnClickListener(new ArticleAdapter.OnItemClickListner() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        Toast.makeText(getApplicationContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+
+                    }
+                });
             }
         });
     }

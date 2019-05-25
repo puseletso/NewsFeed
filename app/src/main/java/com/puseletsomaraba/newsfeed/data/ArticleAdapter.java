@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.puseletsomaraba.newsfeed.R;
 import com.puseletsomaraba.newsfeed.util.Util;
@@ -23,6 +22,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
 
     ArrayList<Article> articles = new ArrayList<>();
     Context context;
+    private OnItemClickListner itemClickListner;
 
 
     public ArticleAdapter(ArrayList<Article> articles, Context context) {
@@ -83,6 +83,16 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         return articles.size();
     }
 
+    public void setOnClickListener(OnItemClickListner itemClickListner) {
+        this.itemClickListner = itemClickListner;
+
+    }
+
+
+    public interface OnItemClickListner {
+        void onItemClick(View view, int position);
+    }
+
     //ViewHolder initialises the views and set the click listner ,when article is clicked,it takes to to full article
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         //instantiate views
@@ -103,8 +113,9 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ViewHold
         }
 
         @Override
-        public void onClick(View v) {
-            Toast.makeText(context, "Redirect me to full article", Toast.LENGTH_LONG).show();
+        public void onClick(View view) {
+            itemClickListner.onItemClick(view, getAdapterPosition());
+
 
 
         }
